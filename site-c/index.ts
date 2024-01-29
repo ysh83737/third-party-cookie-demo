@@ -62,6 +62,21 @@ function trackUser(userId: string, referer: string) {
   }
 }
 
+app.get('/image.jpeg', (request, reply) => {
+  const referer = request.headers.referer || '';
+  const userId = request.cookies.userId || '';
+
+  const trackUserId = trackUser(userId, referer);
+  if (trackUserId) {
+    reply.header('set-cookie', `userId=${trackUserId}; Max-Age=${7 * 24 * 60 * 60}; SameSite=None; Secure`)
+  }
+
+  const image = fs.readFileSync(path.resolve(__dirname, '../assets', 'image.jpeg'))
+
+  reply.type('image/jpeg');
+  reply.send(image)
+})
+
 app.listen({ port: 3003 }, (err, address) => {
   if (err) throw err
   console.log(`Server is now listening on ${address}`)
