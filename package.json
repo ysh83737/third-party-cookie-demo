@@ -1,0 +1,19 @@
+{
+  "name": "third-party-cookie-demo",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "@fastify/cookie": "^9.3.1",
+    "@fastify/cors": "^8.5.0",
+    "fastify": "^4.25.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.5",
+    "jiti": "^1.21.0"
+  },
+  "scripts": {
+    "a": "jiti site-a/index.ts",
+    "b": "jiti site-b/index.ts",
+    "c": "jiti site-c/index.ts"
+  }
+}
