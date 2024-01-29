@@ -17,6 +17,13 @@ app.register(cookie, {
 });
 
 app.get('/', (request, reply) => {
+  const { username, token } = request.cookies;
+
+  console.group('用户登录信息：');
+  console.log('username = ', username);
+  console.log('token = ', token);
+  console.groupEnd();
+
   const html = fs.readFileSync(path.resolve(__dirname, 'index.html'), { encoding: 'utf-8' })
 
   reply.type('text/html')

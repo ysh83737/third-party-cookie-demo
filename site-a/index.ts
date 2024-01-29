@@ -18,6 +18,17 @@ app.get('/', (request, reply) => {
   reply.send(html)
 })
 
+app.post('/login', (request, reply) => {
+  const { username } = request.body as Record<string, string>;
+
+  const token = 'USER_TOKEN';
+
+  reply.header('set-cookie', `usename=${username}; Max-Age=${7 * 24 * 60 * 60}; SameSite=None; Secure`)
+  reply.header('set-cookie', `token=${token}; Max-Age=${7 * 24 * 60 * 60}; SameSite=None; Secure`)
+
+  reply.send({ token });
+})
+
 app.listen({ port: 3001 }, (err, address) => {
   if (err) throw err
   console.log(`Server is now listening on ${address}`)

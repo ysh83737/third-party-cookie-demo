@@ -7,5 +7,17 @@
 </head>
 <body>
   <h1>Site C - 3rd</h1>
+
+  <script>
+    window.addEventListener('message', ({ data }) => {
+      const { token, username } = data
+      if (token) {
+        document.cookie = `token=${token}; max-age=${7 * 24 * 60 * 60}; SameSite=None; Secure`;
+      }
+      if (username) {
+        document.cookie = `username=${username}; max-age=${7 * 24 * 60 * 60}; SameSite=None; Secure`;
+      }
+    })
+  </script>
 </body>
 </html>

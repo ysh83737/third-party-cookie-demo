@@ -7,7 +7,31 @@
 </head>
 <body>
   <h1>Site A</h1>
-  <!-- <iframe src="https://site-c.com:3003/3rd" frameborder="0"></iframe> -->
-  <img src="https://site-c.com:3003/image.jpeg">
+  <iframe id="login-frame" src="https://site-c.com:3003/3rd" frameborder="0"></iframe>
+  <!-- <img src="https://site-c.com:3003/image.jpeg"> -->
+
+  <div>
+    <input type="text" id="username">
+    <button onclick="login()">登录</button>
+  </div>
+
+  <script>
+    async function login() {
+      const username = document.querySelector('#username').value;
+
+      const response = await fetch('/login', {
+        method: 'post',
+        body: JSON.stringify({ username }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      const result = await response.json();
+
+      const frame = document.querySelector('#login-frame');
+      frame.contentWindow.postMessage({ ...result, username }, '*');
+    }
+  </script>
 </body>
 </html>
